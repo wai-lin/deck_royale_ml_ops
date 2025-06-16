@@ -1,10 +1,59 @@
 [project]
-name = "backend"
+name = "assignment-4-fastapi-setup"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
+
 dependencies = [
     "beautifulsoup4>=4.13.4",
+    "fastapi[standard]>=0.115.12",
+    "httpx>=0.28.1",
+    "pytest>=8.4.0",
     "requests>=2.32.4",
 ]
+
+[dependency-groups]
+dev = [
+    "mypy>=1.16.0",
+    "pre-commit>=4.2.0",
+    "ruff>=0.11.13",
+]
+
+[tool.mypy]
+# Mypy is a static type checker for Python.
+mypy_path = "backend"  # Path to the source code for type checking
+python_version = "3.11"        # Target Python version for type checking
+warn_return_any = true         # Warn if functions implicitly return 'Any'
+warn_unused_configs = true     # Warn about unused Mypy settings
+disallow_untyped_defs = true   # Require type hints for function definitions
+disallow_incomplete_defs = true # Require all parts of a function signature to be typed
+check_untyped_defs = true      # Still type check the body of untyped functions
+disallow_untyped_decorators = true # Require decorators to be typed
+no_implicit_optional = true    # Make 'Optional[T]' explicit (no 'T' implying 'T | None')
+warn_redundant_casts = true    # Warn if a type cast is unnecessary
+warn_unused_ignores = true     # Warn about '# type: ignore' comments that are no longer needed
+warn_no_return = true          # Warn if a function doesn't return when it should (or vice-versa)
+warn_unreachable = true        # Warn about code that can never be executed
+strict_equality = true         # Enforce stricter type checking for equality operations
+
+# Handle missing imports gracefully for MLOps libraries
+ignore_missing_imports = true
+
+# Exclude problematic directories
+exclude = [
+    "^build/",
+    "^dist/",
+    "^\\.venv/",
+    "^\\.git/",
+]
+
+# Specific overrides for ML libraries without type stubs
+[[tool.mypy.overrides]]
+module = [
+    "sklearn.*",
+    "joblib.*",
+    "pandas.*",
+    "numpy.*",
+]
+ignore_missing_imports = true
