@@ -1,4 +1,5 @@
 from .scraper import Scraper
+from .parser import parse_decks
 
 SCRAPE_BASE_URL = "https://royaleapi.com/decks"
 
@@ -14,13 +15,5 @@ def get_popular_decks():
         url=f"{SCRAPE_BASE_URL}/popular",
         cached_file_name="popular_decks",
         debug=True,
-    )
-    soup = s.scrape()
-
-    # Extract popular decks from the BeautifulSoup object
-    popular_decks = []
-    decks = soup.select("div[id^='deck_']")
-    # print decks as html string
-    print(str(decks))
-
-    return popular_decks
+    ).scrape()
+    return parse_decks(s)
