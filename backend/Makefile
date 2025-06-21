@@ -10,6 +10,10 @@ dev: ## Run the FastAPI application
 	@echo "Running FastAPI application..."
 	uv run uvicorn src.main:app --reload
 
+start: ## Run the FastAPI application
+	@echo "Running FastAPI application..."
+	uv run uvicorn src.main:app
+
 format: ## Format code using Ruff formatter
 	@echo "Formatting code..."
 	uv run ruff format $(CODE_DIRS)
