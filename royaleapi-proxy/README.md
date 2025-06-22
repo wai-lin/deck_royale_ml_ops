@@ -42,13 +42,16 @@ Create the following `docker-compose.yml` file in your hosting server.
 
 ```yaml
 services:
-  hono-proxy:
+  royaleapi-proxy:
     image: registry.digitalocean.com/do-registery/hono-royaleapi-proxy:latest
     ports:
       - "80:3001"
     environment:
       - API_KEY=${API_KEY}
       - ALLOWED_ORIGINS=${ALLOWED_ORIGINS}
+      - API_KEY_1=${API_KEY_1}
+      - API_KEY_2=${API_KEY_2}
+      - API_KEY_3=${API_KEY_3}
     restart: unless-stopped
 ```
 

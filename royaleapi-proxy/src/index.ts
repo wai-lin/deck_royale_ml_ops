@@ -2,7 +2,7 @@ import "dotenv/config";
 import { serve } from "@hono/node-server";
 import { Hono, type HonoRequest } from "hono";
 import { cors } from "hono/cors";
-import { logRequestDetails, logResponseDetails } from "./utils.js";
+import { logRequestDetails, logResponseDetails, rotateApiKeys } from "./utils.js";
 
 const TARGET_API = "https://api.clashroyale.com";
 
@@ -39,17 +39,15 @@ app.get("/health", (c) => {
 app.get("*", async (c) => {
   logRequestDetails(c.req);
 
-  const Authorization = c.req.raw.headers.get("Authorization");
-  if (!Authorization) {
-    return c.text("Unauthorized!", 401);
-  }
-
   const path = c.req.path;
   const method = c.req.method;
+  const apiKey = rotateApiKeys()
 
   const response = await fetch(`${TARGET_API}${path}`, {
     method,
-    headers: { Authorization },
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+    },
   });
 
   logResponseDetails(response);

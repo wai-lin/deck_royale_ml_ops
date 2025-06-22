@@ -29,3 +29,22 @@ export async function logResponseDetails(res: Response) {
   console.log("==========================================");
   console.log("==========================================");
 }
+
+const apiKeys = [
+  process.env.API_KEY_1 ?? "",
+  process.env.API_KEY_2 ?? "",
+  process.env.API_KEY_3 ?? "",
+];
+/**
+ * Rotates API keys by shifting the first key to the end of the list.
+ * @returns a rotated API key from the list of available keys
+ */
+export function rotateApiKeys(): string {
+  const key = apiKeys.shift();
+  if (key) {
+    apiKeys.push(key);
+    return key;
+  } else {
+    throw new Error("No API keys available");
+  }
+}
