@@ -3,45 +3,45 @@ from pydantic import BaseModel, RootModel
 
 
 class IconUrls(BaseModel):
-    medium: str
+    medium: Optional[str] = None
     evolutionMedium: Optional[str] = None
 
 
 class Card(BaseModel):
-    name: str
-    id: int
-    level: int
-    maxLevel: int
+    name: Optional[str] = None
+    id: Optional[int] = None
+    level: Optional[int] = None
+    maxLevel: Optional[int] = None
     maxEvolutionLevel: Optional[int] = None
     evolutionLevel: Optional[int] = None
     starLevel: Optional[int] = None
-    rarity: str
-    count: int
-    elixirCost: int
-    iconUrls: IconUrls
+    rarity: Optional[str] = None
+    count: Optional[int] = None
+    elixirCost: Optional[int] = None
+    iconUrls: Optional[IconUrls] = None
 
 
 class Arena(BaseModel):
-    id: int
-    name: str
+    id: Optional[int] = None
+    name: Optional[str] = None
 
 
 class Clan(BaseModel):
-    tag: str
-    name: str
-    badgeId: int
+    tag: Optional[str] = None
+    name: Optional[str] = None
+    badgeId: Optional[int] = None
 
 
 class PathOfLegendSeasonResult(BaseModel):
-    leagueNumber: int
-    trophies: int
+    leagueNumber: Optional[int] = None
+    trophies: Optional[int] = None
     rank: Optional[int] = None
 
 
 class ArenaProgress(BaseModel):
-    arena: Arena
-    trophies: int
-    bestTrophies: int
+    arena: Optional[Arena] = None
+    trophies: Optional[int] = None
+    bestTrophies: Optional[int] = None
 
 
 class Progress(RootModel[Dict[str, ArenaProgress]]):
@@ -54,71 +54,71 @@ class Progress(RootModel[Dict[str, ArenaProgress]]):
 
 class SeasonStats(BaseModel):
     id: Optional[str] = None
-    trophies: int
+    trophies: Optional[int] = None
 
 
 class LeagueStatistics(BaseModel):
-    currentSeason: Dict[str, int]
-    previousSeason: SeasonStats
-    bestSeason: SeasonStats
+    currentSeason: Optional[Dict[str, int]] = None
+    previousSeason: Optional[SeasonStats] = None
+    bestSeason: Optional[SeasonStats] = None
 
 
 class Badge(BaseModel):
-    name: str
-    level: int
-    maxLevel: int
-    progress: int
-    target: int
-    iconUrls: Dict[str, str]
+    name: Optional[str] = None
+    level: Optional[int] = None
+    maxLevel: Optional[int] = None
+    progress: Optional[int] = None
+    target: Optional[int] = None
+    iconUrls: Optional[Dict[str, str]] = None
 
 
 class Achievement(BaseModel):
-    name: str
-    stars: int
-    value: int
-    target: int
-    info: str
+    name: Optional[str] = None
+    stars: Optional[int] = None
+    value: Optional[int] = None
+    target: Optional[int] = None
+    info: Optional[str] = None
     completionInfo: Optional[str] = None
 
 
 class Player(BaseModel):
-    tag: str
-    name: str
-    expLevel: int
-    trophies: int
-    bestTrophies: int
-    wins: int
-    losses: int
-    battleCount: int
-    threeCrownWins: int
-    challengeCardsWon: int
-    challengeMaxWins: int
-    tournamentCardsWon: int
-    tournamentBattleCount: int
-    role: str
-    donations: int
-    donationsReceived: int
-    totalDonations: int
-    warDayWins: int
-    clanCardsCollected: int
-    clan: Clan
-    arena: Arena
-    leagueStatistics: LeagueStatistics
-    badges: List[Badge]
-    achievements: List[Achievement]
-    cards: List[Card]
-    currentDeck: List[Card]
-    currentDeckSupportCards: List[Card]
-    currentFavouriteCard: Card
-    starPoints: int
-    expPoints: int
-    legacyTrophyRoadHighScore: int
-    currentPathOfLegendSeasonResult: PathOfLegendSeasonResult
-    lastPathOfLegendSeasonResult: PathOfLegendSeasonResult
-    bestPathOfLegendSeasonResult: PathOfLegendSeasonResult
-    progress: Progress
-    totalExpPoints: int
-    supportCards: List[Card]
+    tag: Optional[str] = None
+    name: Optional[str] = None
+    expLevel: Optional[int] = None
+    trophies: Optional[int] = None
+    bestTrophies: Optional[int] = None
+    wins: Optional[int] = None
+    losses: Optional[int] = None
+    battleCount: Optional[int] = None
+    threeCrownWins: Optional[int] = None
+    challengeCardsWon: Optional[int] = None
+    challengeMaxWins: Optional[int] = None
+    tournamentCardsWon: Optional[int] = None
+    tournamentBattleCount: Optional[int] = None
+    role: Optional[str] = None
+    donations: Optional[int] = None
+    donationsReceived: Optional[int] = None
+    totalDonations: Optional[int] = None
+    warDayWins: Optional[int] = None
+    clanCardsCollected: Optional[int] = None
+    clan: Optional[Clan] = None
+    arena: Optional[Arena] = None
+    leagueStatistics: Optional[LeagueStatistics] = None
+    badges: Optional[List[Badge]] = None
+    achievements: Optional[List[Achievement]] = None
+    cards: Optional[List[Card]] = None
+    currentDeck: Optional[List[Card]] = None
+    currentDeckSupportCards: Optional[List[Card]] = None
+    currentFavouriteCard: Optional[Card] = None
+    starPoints: Optional[int] = None
+    expPoints: Optional[int] = None
+    legacyTrophyRoadHighScore: Optional[int] = None
+    currentPathOfLegendSeasonResult: Optional[PathOfLegendSeasonResult] = None
+    lastPathOfLegendSeasonResult: Optional[PathOfLegendSeasonResult] = None
+    bestPathOfLegendSeasonResult: Optional[PathOfLegendSeasonResult] = None
+    progress: Optional[Progress] = None
+    totalExpPoints: Optional[int] = None
+    supportCards: Optional[List[Card]] = None
 
     class Config:
         populate_by_name = True
