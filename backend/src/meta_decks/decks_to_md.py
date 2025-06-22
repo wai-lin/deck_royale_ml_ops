@@ -12,13 +12,14 @@ def decks_to_md(decks: list[Deck]):
         d += f"  - Average Elixir: {deck.avg_elixir}\n"
         d += f"  - Four Cards Cycle: {deck.four_cards_cycle}\n"
 
-        d += "  - Stats:\n"
+        d += "  - Stats: has 2 parts first part shows the record in percentage, second part shows the exact record.\n"
         for stat in deck.stats:
             d += f"    - Rating: {stat.rating}\n"
             d += f"    - Usage: {stat.usage}\n"
             d += f"    - Wins: {stat.wins}\n"
             d += f"    - Draws: {stat.draws}\n"
             d += f"    - Losses: {stat.losses}\n"
+            d += "    - ___\n"
 
         d += "  - Cards:\n"
         for card in deck.cards:
