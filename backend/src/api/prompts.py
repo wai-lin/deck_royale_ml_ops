@@ -20,4 +20,6 @@ async def prompts(request: PromptRequest):
         user_input=request.message,
         player_id=request.player_id,
     )
-    return {"message": response.output_text}
+    if hasattr(response, "output_text"):
+        return {"message": response.output_text}
+    return {"message": "No output text found in response."}

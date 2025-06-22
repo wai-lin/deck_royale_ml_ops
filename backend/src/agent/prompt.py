@@ -1,7 +1,10 @@
 import mlflow
+import requests
 
 from openai import OpenAI
+from pydantic import ValidationError
 from ..clashroyale import get_player_info, player_to_md
+from ..clashroyale.schemas import Player
 from ..get_envs import get_envs
 from ..meta_decks import decks, decks_to_md
 
@@ -46,8 +49,23 @@ def ask_deck_advice(user_input: str, player_id: str = None):
 
     input = "User input:\n"
     input += f"{user_input}\n\n"
+
     if player_id:
-        player = get_player_info(player_id)
+        player_resp = get_player_info(player_id)
+
+        try:
+            player_resp.raise_for_status()  # Raises HTTPError for bad status codes
+        except requests.HTTPError as e:
+            print(f"HTTP error occurred: {e} - Response content: {player_resp.text}")
+            return None
+
+        try:
+            player_json = player_resp.json()
+            player = Player.model_validate(player_json, strict=False)
+        except ValidationError as e:
+            print(f"Pydantic validation error: {e}")
+            return None
+
         input += player_to_md(player)
 
     response = openai.responses.create(
