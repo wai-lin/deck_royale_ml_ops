@@ -202,3 +202,7 @@ __marimo__/
 
 # Ignore all files in the __ignored directory
 __ignored/
+
+# MLFlow
+mlruns/
+mlartifacts/
