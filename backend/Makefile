@@ -6,9 +6,17 @@ install:
 	uv run pre-commit install
 	@echo "Pre-commit hooks installed."
 
+run_mlflow: ## Run the MLFLOW server
+	@echo "Running MLFLOW server..."
+	uv run mlflow server --host 127.0.0.1 --port 5001
+
 dev: ## Run the FastAPI application
 	@echo "Running FastAPI application..."
 	uv run uvicorn src.main:app --reload
+
+start: ## Run the FastAPI application
+	@echo "Running FastAPI application..."
+	uv run uvicorn src.main:app
 
 format: ## Format code using Ruff formatter
 	@echo "Formatting code..."

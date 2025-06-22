@@ -4,6 +4,7 @@ from bs4 import BeautifulSoup
 
 CACHE_FOLDER = "cached_scrapings"
 
+
 class Scraper:
     """
     A class to scrape HTML content from a given URL and cache it.
@@ -48,7 +49,7 @@ class Scraper:
         if response.status_code != 200:
             raise Exception(f"Failed to fetch data from {self.url}")
 
-        return response.content.decode('utf-8')
+        return response.content.decode("utf-8")
 
     def scrape(self) -> BeautifulSoup:
         """
