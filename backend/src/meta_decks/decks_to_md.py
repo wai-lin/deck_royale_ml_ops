@@ -19,7 +19,7 @@ def decks_to_md(decks: list[Deck]):
             d += f"    - Wins: {stat.wins}\n"
             d += f"    - Draws: {stat.draws}\n"
             d += f"    - Losses: {stat.losses}\n"
-            d += "    - ___\n"
+            d += "    - = = = = =\n"
 
         d += "  - Cards:\n"
         for card in deck.cards:
