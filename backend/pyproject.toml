@@ -8,6 +8,7 @@ requires-python = ">=3.11"
 dependencies = [
     "beautifulsoup4>=4.13.4",
     "fastapi[standard]>=0.115.12",
+    "firebase-admin>=6.9.0",
     "httpx>=0.28.1",
     "mlflow>=3.1.0",
     "openai>=1.90.0",
