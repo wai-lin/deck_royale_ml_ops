@@ -206,3 +206,6 @@ __ignored/
 # MLFlow
 mlruns/
 mlartifacts/
+
+# Firebase Admin SDK
+*firebase-adminsdk*
