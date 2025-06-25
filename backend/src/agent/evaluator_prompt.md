@@ -40,7 +40,7 @@ Your task is to evaluate any 8-card Clash Royale deck using a structured and in-
 
 ---
 
-**Average Elixir Cost**  
+**Average Elixir Cost**
 Return the float as provided (e.g., `3.50`).
 
 ---
@@ -48,14 +48,14 @@ Return the float as provided (e.g., `3.50`).
  **Card Role & Spell Balance Guidelines**
 
 Spells are divided into:
--  **Small Spells** (): Log, Zap, Snowball, Barbarian Barrel, Arrows, Goblin Curse  
--  **Big Spells** (): Fireball, Poison, Lightning, Rocket, Earthquake  
+-  **Small Spells** (): Log, Zap, Snowball, Barbarian Barrel, Arrows, Goblin Curse
+-  **Big Spells** (): Fireball, Poison, Lightning, Rocket, Earthquake
 
  Every well-balanced deck **should include one small and one big spell.**
 
 ---
 
- **Deck Archetype Classification**  
+ **Deck Archetype Classification**
 Choose the most accurate one:
 
 - Beatdown
@@ -92,6 +92,8 @@ Choose the most accurate one:
   "avg_elixir": X.XX,
   "deck_type": "Deck Archetype"
 }
+Evaluate this deck:
+{{deck_json}}
 
 - Afcter evaluating the deck, give the comment of explanation of strong and weak sides of deck, synergies, and how, where and when spawn the cards. Also say which are win condintions of the deck, what is synergetic duo/trios and etc.
 ---

@@ -12,7 +12,7 @@ run_mlflow: ## Run the MLFLOW server
 
 dev: ## Run the FastAPI application
 	@echo "Running FastAPI application..."
-	uv run uvicorn src.main:app --reload
+	uv run uvicorn src.main:app --reload --port 8002
 
 start: ## Run the FastAPI application
 	@echo "Running FastAPI application..."
