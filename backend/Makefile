@@ -12,11 +12,11 @@ run_mlflow: ## Run the MLFLOW server
 
 dev: ## Run the FastAPI application
 	@echo "Running FastAPI application..."
-	uv run uvicorn src.main:app --reload
+	uv run uvicorn src.main:app --host 0.0.0.0 --port 8000 --reload
 
 start: ## Run the FastAPI application
 	@echo "Running FastAPI application..."
-	uv run uvicorn src.main:app
+	uv run uvicorn src.main:app --host 0.0.0.0 --port 8000
 
 format: ## Format code using Ruff formatter
 	@echo "Formatting code..."

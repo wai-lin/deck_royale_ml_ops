@@ -1,0 +1,31 @@
+{
+    "users": { // main collection
+        "{userId}": { // document for each user
+            "conversations": { // sub-collection for conversations
+                "{conversationId}": { // document for each conversation
+                    "title": "string",
+                    "createdAt": "timestamp",
+                    "updatedAt": "timestamp",
+                    "messages": { // sub-collection for messages
+                        "{messageId}": { // document for each message
+                            "role": "string", // e.g., "user", "assistant"
+                            "content": "string",
+                            "createdAt": "timestamp",
+                            "updatedAt": "timestamp"
+                        }
+                    }
+                }
+            }
+        }
+    },
+
+    "settings": { // main collection for user settings
+        "{userId}": { // document for each user
+            "theme": "string", // e.g., "light", "dark"
+            "language": "string", // e.g., "en", "es"
+            "notificationsEnabled": "boolean",
+            "createdAt": "timestamp",
+            "updatedAt": "timestamp"
+        }
+    }
+}
