@@ -204,3 +204,7 @@ __marimo__/
 .DS_Store
 
 frontend/
+
+# MLFlow
+mlruns/
+mlartifacts/
