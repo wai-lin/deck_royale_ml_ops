@@ -8,15 +8,9 @@ CACHE_FOLDER = "cached_scrapings"
 class Scraper:
     """
     A class to scrape HTML content from a given URL and cache it.
-    Attributes:
-        url (str): The URL to scrape.
     """
 
     def __init__(self, url: str, cached_file_name: str, debug: bool = False):
-        """
-        Initializes the Scraper class.
-        Ensures that the cache file exists.
-        """
         self.url = url
         self.cached_file_path = f"{CACHE_FOLDER}/{cached_file_name}.txt"
         self.debug = debug
@@ -26,18 +20,14 @@ class Scraper:
         if not os.path.exists(CACHE_FOLDER):
             os.makedirs(CACHE_FOLDER)
         try:
-            with open(self.cached_file_path, "x") as f:
-                f.write("")  # Create an empty file
-        except FileExistsError:
-            pass  # File already exists, no action needed
+            # Just check if the file can be read, not for content yet
+            with open(self.cached_file_path, "r", encoding="utf-8", errors="replace") as f:
+                _ = f.read()
+        except FileNotFoundError:
+            with open(self.cached_file_path, "w", encoding="utf-8") as f:
+                f.write("")
 
     def _get_html(self):
-        """
-        Fetches the HTML content of the given URL.
-
-        Returns:
-            str: The HTML content of the page.
-        """
         headers = {
             "User-Agent": (
                 "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
@@ -52,30 +42,30 @@ class Scraper:
         return response.content.decode("utf-8")
 
     def scrape(self) -> BeautifulSoup:
-        """
-        Scrapes the HTML content from the given URL and caches it.
-        """
-        # Check if the cache file exists and read its content
-        has_cache = False
+        # Read cache if it exists
         cached_file = ""
-        with open(self.cached_file_path, "r") as f:
-            cached_file = f.read().strip()
-            has_cache = cached_file != ""
+        has_cache = False
 
-        # If cache not exists, fetch the HTML content and save it to the cache file
+        try:
+            with open(self.cached_file_path, "r", encoding="utf-8", errors="replace") as f:
+                cached_file = f.read().strip()
+                has_cache = bool(cached_file)
+        except FileNotFoundError:
+            has_cache = False
+
+        # If no valid cache, fetch and save new HTML
         if not has_cache:
             cached_file = self._get_html()
-            with open(self.cached_file_path, "w") as file:
+            with open(self.cached_file_path, "w", encoding="utf-8") as file:
                 file.write(cached_file)
 
-        # Debugging output
         if self.debug:
             print("Scraper Debug Info:")
             print("========================================")
-            print(f"Scraper initialized with URL: {self.url}")
-            print(f"Cache file exists: {has_cache}")
-            print(f"Cache file path: {self.cached_file_path}")
-            print(f"Cache file content: {cached_file[:100]}")
+            print(f"URL: {self.url}")
+            print(f"Cache file used: {has_cache}")
+            print(f"Path: {self.cached_file_path}")
+            print(f"Content preview: {cached_file[:100]}")
             print("========================================")
 
         return BeautifulSoup(cached_file, "html.parser")

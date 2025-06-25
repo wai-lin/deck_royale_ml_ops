@@ -20,16 +20,16 @@ async def prompts(request: PromptRequest):
 
     player = Player(id=request.player_id)
 
-    # Add a conversation entry for the prompt
-    try:
-        player.add_conversation(
-            schemas.AddConversation(
-                type="prompt",
-                message=request.message,
-            )
-        )
-    except Exception as e:
-        return {"message": f"Error adding conversation: {str(e)}"}
+    # # Add a conversation entry for the prompt
+    # try:
+    #     player.add_conversation(
+    #         schemas.AddConversation(
+    #             type="prompt",
+    #             message=request.message,
+    #         )
+    #     )
+    # except Exception as e:
+    #     return {"message": f"Error adding conversation: {str(e)}"}
 
     # Get the response from the agent
     try:
@@ -41,18 +41,18 @@ async def prompts(request: PromptRequest):
         return {"message": f"Error getting response: {str(e)}"}
 
     # Save the response in the player's conversation
-    try:
-        player.set_conversation(
-            schemas.SetConversation(
-                id=response.id,
-                type="response",
-                message=response.output_text,
-            )
-        )
-    except Exception as e:
-        return {"message": f"Error setting conversation: {str(e)}"}
+    # try:
+    #     player.set_conversation(
+    #         schemas.SetConversation(
+    #             id=response.id,
+    #             type="response",
+    #             message=response.output_text,
+    #         )
+    #     )
+    # except Exception as e:
+    #     return {"message": f"Error setting conversation: {str(e)}"}
 
     # Return the response
-    if hasattr(response, "id") and hasattr(response, "output_text"):
-        return {"response_id": response.id, "message": response.output_text}
+    # if hasattr(response, "id") and hasattr(response, "output_text"):
+    #     return {"response_id": response.id, "message": response.output_text}
     return {"message": "No output text found in response."}
