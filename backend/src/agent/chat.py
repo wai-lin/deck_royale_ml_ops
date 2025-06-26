@@ -95,6 +95,7 @@ def evaluation(prompt: str, deck_data: AgentResponseJSON):
         raise
 
     with mlflow.start_run():
+        mlflow.log_param("user prompt", prompt)
         mlflow.log_param("deck_name", deck_data.deck_name)
         mlflow.log_param("average_elixir_cost", deck_data.average_elixir_cost)
         mlflow.log_param("cards", deck_data.cards)
@@ -152,17 +153,36 @@ def ask_agent(user_input: str, player_id: str = None):
 
         input += player_to_md(player)
 
-    response = openai.responses.parse(
+    response = openai.responses.create(
         model="gpt-4.1",
-        instructions=instructions,
-        input=input,
-        text_format=AgentResponseJSON,
+        input=[
+            {"role": "system", "content": instructions },
+            {"role": "user", "content": input},
+        ],
+        text={"format": {"type": "json_object"}}
     )
+    content = response.output_text
+    print("Raw model output:", repr(content))
 
-    eval_resp = evaluation(user_input, response.output_parsed)
+    # Attempt to parse the content as JSON
+    try:
+        parsed = json.loads(content)
+    except json.JSONDecodeError as e:
+        print(f"Failed to parse agent response as JSON: {e}")
+        print("Raw content:", content)
+        raise
+
+    try:
+        agent_resp = AgentResponseJSON.model_validate(parsed)
+    except ValidationError as e:
+        print(f"Validation error for agent response: {e}")
+        print("Parsed content:", parsed)
+        raise
+
+    eval_resp = evaluation(user_input, agent_resp)
 
     return {
         "id": response.id,
-        "output": response.output_parsed,
+        "output": agent_resp,
         "evaluation": eval_resp,
     }

@@ -14,9 +14,10 @@ ___
 ___
 
 ## Output Format
+
 Return a JSON object with these fields:
 - deck_name: string
-- average_elixir: number
+- average_elixir_cost: number
 - cards: list of strings (card names)
 - comment: string (markdown summary of the deck’s analysis, including key points, pros, and cons)
 
