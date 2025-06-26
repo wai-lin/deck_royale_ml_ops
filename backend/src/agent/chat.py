@@ -162,7 +162,6 @@ def ask_agent(user_input: str, player_id: str = None):
         text={"format": {"type": "json_object"}}
     )
     content = response.output_text
-    print("Raw model output:", repr(content))
 
     # Attempt to parse the content as JSON
     try:
