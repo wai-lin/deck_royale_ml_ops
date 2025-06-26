@@ -14,6 +14,7 @@ class Message(BaseModel):
     """Model for a message in a conversation."""
     role: str
     content: Any
+    evaluation: Optional[Any] = None
     created_at: Optional[Any] = None
     updated_at: Optional[Any] = None
     assistant_response_id: Optional[str] = None

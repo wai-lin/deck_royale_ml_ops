@@ -25,6 +25,7 @@ def chat(req: PromptRequest):
             return {"error": "No response from agent."}
         
         output = agent_resp["output"].copy()
+        eval = agent_resp["evaluation"].copy()
 
         try:
             full_cards = []
@@ -36,7 +37,7 @@ def chat(req: PromptRequest):
             output.cards = full_cards
         except Exception as e:
             return {"error": f"Error retrieving cards: {str(e)}"}
-        
+
         try:
             chat_manager = ChatManager(player_id=req.player_id)
             chat_manager.add_message(
@@ -51,6 +52,7 @@ def chat(req: PromptRequest):
                 chat_schemas.Message(
                     role="assistant",
                     content=output.model_dump(),
+                    evaluation=eval.model_dump(),
                     assistant_response_id=agent_resp["id"],
                 ).model_dump()
             )
@@ -59,6 +61,7 @@ def chat(req: PromptRequest):
 
         return {
             "response": output.model_dump(),
+            "evaluation": eval.model_dump(),
             "agent_response_id": agent_resp["id"],
         }
     except Exception as e:

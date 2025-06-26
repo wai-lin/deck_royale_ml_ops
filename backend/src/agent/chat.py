@@ -1,8 +1,10 @@
 import mlflow
 import requests
+import json
 
 from openai import OpenAI
 from pydantic import BaseModel, ValidationError
+from typing import Any
 from ..clashroyale import get_player_info, player_to_md
 from ..clashroyale.schemas import Player
 from ..get_envs import get_envs
@@ -31,6 +33,81 @@ class AgentResponseJSON(BaseModel):
     average_elixir_cost: float
     cards: list[str]
     comment: str
+
+class EvaluationResponseJSON(BaseModel):
+    overall: float
+    defense: float
+    attack: float
+    synergy: float
+    versatility: float
+    avg_elixir: float
+    difficulty: float
+    deck_type: str
+    comments: str
+
+
+@mlflow.trace
+def evaluation(prompt: str, deck_data: AgentResponseJSON):
+    """
+    Function to evaluate a Clash Royale deck using OpenAI API.
+    """
+
+    # Load the prompt instructions from a markdown file
+    with open(f"{PROMPTS_FOLDER}/evaluation_prompt.md", "r") as file:
+        prompt_input = file.read()
+        # Replace placeholders in the instructions with actual data
+        prompt_input = prompt_input.replace(
+            "{{deck_json}}",
+            json.dumps(deck_data.__dict__),
+        )
+    
+    completion = openai.chat.completions.create(
+        model="gpt-4.1",
+        response_format={"type": "json_object"},
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a Clash Royale deck evaluation assistant.",
+            },
+            {
+                "role": "user",
+                "content": prompt_input,
+            }
+        ],
+    )
+
+    content = completion.choices[0].message.content
+    print("Raw model output:", repr(content))
+
+    # Attempt to parse the content as JSON
+    try:
+        parsed = json.loads(content)
+    except json.JSONDecodeError as e:
+        print(f"Failed to parse evaluation response as JSON: {e}")
+        print("Raw content:", content)
+        raise
+
+    try:
+        evaluation_result = EvaluationResponseJSON.model_validate(parsed)
+    except ValidationError as e:
+        print(f"Validation error for evaluation response: {e}")
+        print("Parsed content:", parsed)
+        raise
+
+    with mlflow.start_run():
+        mlflow.log_param("deck_name", deck_data.deck_name)
+        mlflow.log_param("average_elixir_cost", deck_data.average_elixir_cost)
+        mlflow.log_param("cards", deck_data.cards)
+
+        mlflow.log_metric("eval_overall", evaluation_result.overall)
+        mlflow.log_metric("eval_defense", evaluation_result.defense)
+        mlflow.log_metric("eval_attack", evaluation_result.attack)
+        mlflow.log_metric("eval_synergy", evaluation_result.synergy)
+        mlflow.log_metric("eval_versatility", evaluation_result.versatility)
+        mlflow.log_metric("eval_avg_elixir", evaluation_result.avg_elixir)
+        mlflow.log_metric("eval_difficulty", evaluation_result.difficulty)
+
+    return evaluation_result
 
 
 @mlflow.trace
@@ -82,7 +159,10 @@ def ask_agent(user_input: str, player_id: str = None):
         text_format=AgentResponseJSON,
     )
 
+    eval_resp = evaluation(user_input, response.output_parsed)
+
     return {
         "id": response.id,
         "output": response.output_parsed,
+        "evaluation": eval_resp,
     }
