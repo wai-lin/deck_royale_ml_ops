@@ -51,9 +51,17 @@ Spells are divided into:
 -  **Small Spells** (): Log, Zap, Snowball, Barbarian Barrel, Arrows, Goblin Curse
 -  **Big Spells** (): Fireball, Poison, Lightning, Rocket, Earthquake
 
- Every well-balanced deck **should include one small and one big spell.**
+ Every well-balanced deck **usually  includes one small and one big spell.**
+
 
 ---
+ **Deck Usage**
+-in the end of the output, yu must give it as a comments:
+1 liner explanation of where and when and how to use each card
+-saying which cards are defenders, which ones are win condintions and which ones are support
+format should be:
+-card 1 explanation
+-card 2 explanation, etc.
 
  **Deck Archetype Classification**
 Choose the most accurate one:
@@ -96,6 +104,7 @@ Evaluate this deck:
 {{deck_json}}
 
 - Afcter evaluating the deck, give the comment of explanation of strong and weak sides of deck, synergies, and how, where and when spawn the cards. Also say which are win condintions of the deck, what is synergetic duo/trios and etc.
+
 ---
  Output JSON Format:
 ```json
@@ -107,8 +116,18 @@ Evaluate this deck:
   "versatility": X,
   "avg_elixir": X.XX,
   "deck_type": "Deck Archetype",
-  "small_spells": ["Spell1"],
-  "big_spells": ["Spell2"],
-  "comments": "Thorough analysis including key strengths, weaknesses, synergy explanations (including known and potentially new combos), tips for improving the deck, and spell usage insights."
+  "comments": "format the output as said here for some given deck:  **Deck Usage**
+  comments:
+Hog Rider - Win condition, apply pressure, punish opponent's mistakes
+Mega Knight - Tank and splash damage, counter big pushes
+Firecracker - Support, splash damage, anti-air defense
+Skeletons - Cycle, distract, chip damage
+Ice Spirit - Cycle, freeze, support Hog pushes
+Tesla - Defensive building, distracts, counters tanks
+Fireball - Spell, support for Hog pushes, eliminate swarms
+The Log - Spell, clear swarms, push back units, support Hog pushes
+
+This Hog Cycle Control deck excels in defense, with the Mega Knight and Tesla providing sturdy defense against various threats. The Hog Rider serves as the primary win condition, applying pressure and punishing mistakes. Firecracker adds splash damage and anti-air support, complementing the
+Hog pushes. The deck has good synergy and cycle consistency, allowing for quick and effective gameplay. The versatile card selection enables adaptability in different matchups and scenarios, making it a solid choice for ladder and competitive play.
 }
 '''
