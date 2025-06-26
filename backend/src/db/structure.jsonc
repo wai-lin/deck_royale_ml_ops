@@ -17,15 +17,15 @@
                 }
             }
         }
-    },
-
-    "settings": { // main collection for user settings
-        "{userId}": { // document for each user
-            "theme": "string", // e.g., "light", "dark"
-            "language": "string", // e.g., "en", "es"
-            "notificationsEnabled": "boolean",
-            "createdAt": "timestamp",
-            "updatedAt": "timestamp"
-        }
     }
+
+    // "settings": { // main collection for user settings
+    //     "{userId}": { // document for each user
+    //         "theme": "string", // e.g., "light", "dark"
+    //         "language": "string", // e.g., "en", "es"
+    //         "notificationsEnabled": "boolean",
+    //         "createdAt": "timestamp",
+    //         "updatedAt": "timestamp"
+    //     }
+    // }
 }
