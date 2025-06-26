@@ -203,8 +203,6 @@ __marimo__/
 # MacOS
 .DS_Store
 
-frontend/
-
 # MLFlow
 mlruns/
 mlartifacts/
