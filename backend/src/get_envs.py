@@ -12,6 +12,7 @@ class EnvVars(TypedDict):
     royale_api_url: str
     royale_api_key: str
     prompts_dir: str
+    scraped_dir: str
     firebase_sdk_json: str
 
 
@@ -25,6 +26,7 @@ def get_envs() -> EnvVars:
     royale_api_url = os.getenv("ROYALE_API_URL")
     royale_api_key = os.getenv("ROYALE_API_KEY")
     prompts_dir = os.getenv("PROMPTS_DIR")
+    scraped_dir = os.getenv("SCRAPED_DIR")
     firebase_sdk_json = os.getenv("FIREBASE_SDK_JSON")
 
     if not mlflow_uri:
@@ -46,5 +48,6 @@ def get_envs() -> EnvVars:
         "royale_api_url": royale_api_url,
         "royale_api_key": royale_api_key,
         "prompts_dir": prompts_dir,
+        "scraped_dir": scraped_dir,
         "firebase_sdk_json": firebase_sdk_json,
     }
