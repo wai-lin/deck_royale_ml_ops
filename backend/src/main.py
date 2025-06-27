@@ -6,6 +6,7 @@ from .api import chat_api, decks_api, players_api, prompts_api
 app = FastAPI()
 
 origins = [
+    "http://localhost:3002",
     "http://localhost:3000",
 ]
 

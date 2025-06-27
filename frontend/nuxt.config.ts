@@ -7,6 +7,9 @@ export default defineNuxtConfig({
 	},
 	css: ["~/assets/css/main.css"],
 	modules: ["@nuxt/eslint", "@nuxt/ui", "@vueuse/nuxt"],
+	devServer: {
+		port: 3002,
+	},
 	runtimeConfig: {
 		public: {
 			apiBaseUrl: "",
