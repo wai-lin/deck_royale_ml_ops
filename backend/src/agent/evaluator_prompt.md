@@ -37,7 +37,10 @@ Your task is to evaluate any 8-card Clash Royale deck using a structured and in-
    - Recovery ability after a bad rotation
    - Adaptability in both ladder and competitive modes
    - Flexibility for switching between offense and defense
-
+6. ** Difficulty** - Rate:
+   -How easy it is to use the deck
+   -1 being the easiest to use and 10 only for pro players
+   -difficulty level should depend on how much the card placements matter for the deck
 ---
 
 **Average Elixir Cost**
@@ -116,6 +119,7 @@ Evaluate this deck:
   "versatility": X,
   "avg_elixir": X.XX,
   "deck_type": "Deck Archetype",
+  "difficulty": X,
   "comments": "format the output as said here for some given deck:  **Deck Usage**
   comments:
 Hog Rider - Win condition, apply pressure, punish opponent's mistakes
