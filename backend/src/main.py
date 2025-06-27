@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .api import chat_api, decks_api, players_api, prompts_api
+from .api import chat_api, decks_api, players_api
 
 
 app = FastAPI()
@@ -26,4 +26,3 @@ async def read_root():
 app.include_router(chat_api, prefix="/chat")
 app.include_router(decks_api, prefix="/decks")
 app.include_router(players_api, prefix="/players")
-app.include_router(prompts_api, prefix="/prompts")

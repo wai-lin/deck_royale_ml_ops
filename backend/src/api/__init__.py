@@ -6,6 +6,5 @@ from .players import router as players_api
 __all__ = [
     "chat_api",
     "decks_api",
-    "prompts_api",
     "players_api",
 ]

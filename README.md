@@ -1,5 +1,12 @@
 # Deck Royale
 
+Clash Royale deck builder AI assistant.
+
+> This is a class project for **"Engineering and MLOps practices for Modern AI"** module from `Harbour.Space`.
+> The repo focus on the MLOps practices implementations to a RAG system built with OpenAI SDK.
+
+[Final presentation slides](https://docs.google.com/presentation/d/16vQe1-XRLSFrbNqc0dHlwBWgJHI6w5sINKMLGofKzdQ/edit?usp=sharing)
+
 ## How to run with `docker-compose`
 
 1. clone `.env.example` file with new name `.env`.
@@ -11,8 +18,8 @@
 You can check whether the docker is running with one of the following options.
 
 - Option 1:
-    - Try visiting the (backend api docs)[http://localhost:8000/docs]. You should see swagger UI and also try to play around with some api to make sure the backend is working.
-    - Try visiting the (mlflow dashboard)[http://localhost:5001]. You should see the MLFlow dashboard.
+    - Try visiting the [backend api docs](http://localhost:8000/docs). You should see swagger UI and also try to play around with some api to make sure the backend is working.
+    - Try visiting the [mlflow dashboard](http://localhost:5001). You should see the MLFlow dashboard.
 - Option 2:
     - Run the command `docker ps`. The status of services should be `Up`.
 
