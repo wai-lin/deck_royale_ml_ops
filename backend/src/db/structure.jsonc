@@ -8,8 +8,9 @@
                     "updatedAt": "timestamp",
                     "messages": { // sub-collection for messages
                         "{messageId}": { // document for each message
+                            "assistant_response_id": "string", // reference to the assistant response
                             "role": "string", // e.g., "user", "assistant"
-                            "content": "string",
+                            "content": "any",
                             "createdAt": "timestamp",
                             "updatedAt": "timestamp"
                         }
@@ -17,15 +18,14 @@
                 }
             }
         }
-    },
-
-    "settings": { // main collection for user settings
-        "{userId}": { // document for each user
-            "theme": "string", // e.g., "light", "dark"
-            "language": "string", // e.g., "en", "es"
-            "notificationsEnabled": "boolean",
-            "createdAt": "timestamp",
-            "updatedAt": "timestamp"
-        }
     }
+    // "settings": { // main collection for user settings
+    //     "{userId}": { // document for each user
+    //         "theme": "string", // e.g., "light", "dark"
+    //         "language": "string", // e.g., "en", "es"
+    //         "notificationsEnabled": "boolean",
+    //         "createdAt": "timestamp",
+    //         "updatedAt": "timestamp"
+    //     }
+    // }
 }

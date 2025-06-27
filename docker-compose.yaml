@@ -18,11 +18,18 @@ services:
     ports:
       - 8000:8000
     volumes:
-      - ./backend:/app
+      - ./backend/cached_scrapings:/app/cached_scrapings
+      - ./backend/prompts:/app/prompts
+      - ./backend/src:/app/src
+      - ./backend/tests:/app/tests
+      - ./backend/.python-version:/app/.python-version
+      - ./backend/pyproject.toml:/app/pyproject.toml
+      - ./backend/firebase-adminsdk.json:/app/firebase-adminsdk.json
     environment:
       - MLFLOW_URI=${MLFLOW_URI}
       - OPENAI_API_KEY=${OPENAI_API_KEY}
       - ROYALE_API_URL=${ROYALE_API_URL}
       - ROYALE_API_KEY=${ROYALE_API_KEY}
       - PROMPTS_DIR=${PROMPTS_DIR}
+      - SCRAPED_DIR=${SCRAPED_DIR}
       - FIREBASE_SDK_JSON=${FIREBASE_SDK_JSON}
