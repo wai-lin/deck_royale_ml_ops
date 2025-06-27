@@ -15,6 +15,7 @@ def decks_to_md(decks: list[Deck]):
         for card in deck.cards:
             d += f"{card.name}, "
         d = d.rstrip(", ") + "): "
+        decks_md += d + "\n"
 
     # for deck in decks:
     #     d = f"- {deck.deck_id}\n"

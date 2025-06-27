@@ -58,7 +58,7 @@ def evaluation(prompt: str, deck_data: AgentResponseJSON):
         # Replace placeholders in the instructions with actual data
         prompt_input = prompt_input.replace(
             "{{deck_json}}",
-            json.dumps(deck_data.__dict__),
+            json.dumps(deck_data.model_dump()),
         )
     
     completion = openai.chat.completions.create(
