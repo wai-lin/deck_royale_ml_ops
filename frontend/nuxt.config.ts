@@ -22,4 +22,9 @@ export default defineNuxtConfig({
 			firebaseMeasurementId: "",
 		},
 	},
+	app: {
+		head: {
+			title: "Deck Royale",
+		},
+	},
 });
